@@ -1,33 +1,48 @@
 package com.yeditepe.finalexam.ui
 
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.Button
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
-import androidx.lifecycle.viewmodel.compose.viewModel
-import androidx.navigation.NavController
-import com.yeditepe.finalexam.model.Task
-import com.yeditepe.finalexam.viewmodel.TaskViewModel
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 
 @Composable
-fun TaskListScreen(viewModel: TaskViewModel = viewModel()) {
+fun TaskItemScreen() {
 
-    // TODO 3: Read task list from ViewModel
+    var isCompleted: Boolean MutableStateOf<false>
 
-    Column {
-        // TODO 4: Display task titles and completion status
-        // Use a simple Column or LazyColumn
+    Column(modifier = Modifier.padding(16.dp)) {
+
+        Text(
+            text = "Submit Final Project",
+            style = MaterialTheme.typography.titleLarge
+        )
+
+        if (isCompleted) {
+            Text("Completed")
+        } else {
+            Text("Not Completed")
+        }
+        Button(
+            onClick = {
+                isCompleted = !isCompleted
+            }
+        ) {
+            Text("Change Status")
+        }
     }
 }
 
+@Preview(showBackground = true)
 @Composable
-fun TaskRow(task: Task, navController: NavController) {
-
-    Text(
-        text = task.title,
-        modifier = Modifier.clickable {
-            // TODO 3: Navigate to detail screen with task title
-        }
-    )
+fun TaskItemPreview() {
+    TaskItemScreen()
 }
